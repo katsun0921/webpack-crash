@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import style from './style.css'
-
+import logo from './SATO-SATISFY_LOGO.png'
 
 function component() {
   const element = document.createElement('div');
@@ -11,3 +11,7 @@ function component() {
 
 document.body.appendChild(component())
 document.body.classList.add('background')
+
+const image = new Image();
+image.src = logo;
+document.body.appendChild(image);
