@@ -1,9 +1,10 @@
 const path = require('path');
 const outputPath = path.resolve(__dirname, "dist")
 console.log(outputPath)
-const htmlWebpackPlugin = require('html-webpack-plugin')
-const miniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -21,7 +22,7 @@ module.exports = {
       {
         test: /\.(scss|css)$/,
         use: [
-          miniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
         ]
@@ -44,11 +45,11 @@ module.exports = {
     contentBase: outputPath
   },
   plugins: [
-    new htmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: './index.html'
     }),
-    new miniCssExtractPlugin({
+    new MiniCssExtractPlugin({
       filename: '[name].[hash].css'
     })
   ],
@@ -62,6 +63,7 @@ module.exports = {
           }
         }
       }),
+      new OptimizeCSSAssetsPlugin({})
     ],
   },
 }
